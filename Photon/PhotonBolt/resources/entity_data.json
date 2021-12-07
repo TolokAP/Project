@@ -1,0 +1,299 @@
+[
+  {
+    "name": "Inventory",
+    "entityComponents": [
+      {
+        "prefabId": {
+          "Value": 1
+        },
+        "serializerId": {
+          "id": "fe81a972-4c0d-4283-8f96-e37d5827db62"
+        },
+        "updateRate": 1,
+        "clientPredicted": true,
+        "allowInstantiateOnClient": true,
+        "sceneObjectDestroyOnDetach": true,
+        "sceneObjectAutoAttach": true
+      }
+    ],
+    "entityHitboxes": [],
+    "childItems": []
+  },
+  {
+    "name": "InventoryEntity",
+    "entityComponents": [
+      {
+        "prefabId": {
+          "Value": 2
+        },
+        "serializerId": {
+          "id": "fe81a972-4c0d-4283-8f96-e37d5827db62"
+        },
+        "updateRate": 1,
+        "clientPredicted": true,
+        "allowInstantiateOnClient": true,
+        "sceneObjectDestroyOnDetach": true,
+        "sceneObjectAutoAttach": true
+      }
+    ],
+    "entityHitboxes": [],
+    "childItems": []
+  },
+  {
+    "name": "Arrow",
+    "entityComponents": [
+      {
+        "prefabId": {
+          "Value": 3
+        },
+        "serializerId": {
+          "id": "bf67afaa-3381-4601-b4ce-ca85352c41d5"
+        },
+        "updateRate": 1,
+        "clientPredicted": true,
+        "allowInstantiateOnClient": true,
+        "sceneObjectDestroyOnDetach": true,
+        "sceneObjectAutoAttach": true
+      }
+    ],
+    "entityHitboxes": [],
+    "childItems": []
+  },
+  {
+    "name": "ArrowPlayer",
+    "entityComponents": [
+      {
+        "prefabId": {
+          "Value": 4
+        },
+        "serializerId": {
+          "id": "81a091cf-cbcc-4203-af0c-b67df75e0e6e"
+        },
+        "updateRate": 1,
+        "clientPredicted": true,
+        "allowInstantiateOnClient": true,
+        "sceneObjectDestroyOnDetach": true,
+        "sceneObjectAutoAttach": true
+      }
+    ],
+    "entityHitboxes": [],
+    "childItems": []
+  },
+  {
+    "name": "Bow",
+    "entityComponents": [
+      {
+        "prefabId": {
+          "Value": 5
+        },
+        "serializerId": {
+          "id": "81a091cf-cbcc-4203-af0c-b67df75e0e6e"
+        },
+        "updateRate": 1,
+        "clientPredicted": true,
+        "allowInstantiateOnClient": true,
+        "sceneObjectDestroyOnDetach": true,
+        "sceneObjectAutoAttach": true
+      }
+    ],
+    "entityHitboxes": [],
+    "childItems": []
+  },
+  {
+    "name": "BasePrefabWeapons",
+    "entityComponents": [
+      {
+        "prefabId": {
+          "Value": 6
+        },
+        "updateRate": 1,
+        "clientPredicted": true,
+        "allowInstantiateOnClient": true,
+        "sceneObjectDestroyOnDetach": true,
+        "sceneObjectAutoAttach": true
+      }
+    ],
+    "entityHitboxes": [],
+    "childItems": []
+  },
+  {
+    "name": "Chest ",
+    "entityComponents": [
+      {
+        "prefabId": {
+          "Value": 7
+        },
+        "serializerId": {
+          "id": "81a091cf-cbcc-4203-af0c-b67df75e0e6e"
+        },
+        "updateRate": 1,
+        "clientPredicted": true,
+        "allowInstantiateOnClient": true,
+        "sceneObjectDestroyOnDetach": true,
+        "sceneObjectAutoAttach": true
+      }
+    ],
+    "entityHitboxes": [],
+    "childItems": []
+  },
+  {
+    "name": "Gloves",
+    "entityComponents": [
+      {
+        "prefabId": {
+          "Value": 8
+        },
+        "serializerId": {
+          "id": "81a091cf-cbcc-4203-af0c-b67df75e0e6e"
+        },
+        "updateRate": 1,
+        "clientPredicted": true,
+        "allowInstantiateOnClient": true,
+        "sceneObjectDestroyOnDetach": true,
+        "sceneObjectAutoAttach": true
+      }
+    ],
+    "entityHitboxes": [],
+    "childItems": []
+  },
+  {
+    "name": "Shield",
+    "entityComponents": [
+      {
+        "prefabId": {
+          "Value": 9
+        },
+        "serializerId": {
+          "id": "81a091cf-cbcc-4203-af0c-b67df75e0e6e"
+        },
+        "updateRate": 1,
+        "clientPredicted": true,
+        "allowInstantiateOnClient": true,
+        "sceneObjectDestroyOnDetach": true,
+        "sceneObjectAutoAttach": true
+      }
+    ],
+    "entityHitboxes": [],
+    "childItems": []
+  },
+  {
+    "name": "Sword",
+    "entityComponents": [
+      {
+        "prefabId": {
+          "Value": 10
+        },
+        "serializerId": {
+          "id": "81a091cf-cbcc-4203-af0c-b67df75e0e6e"
+        },
+        "updateRate": 1,
+        "clientPredicted": true,
+        "allowInstantiateOnClient": true,
+        "sceneObjectDestroyOnDetach": true,
+        "sceneObjectAutoAttach": true
+      }
+    ],
+    "entityHitboxes": [],
+    "childItems": []
+  },
+  {
+    "name": "BasePlayerPrefab",
+    "entityComponents": [
+      {
+        "prefabId": {
+          "Value": 11
+        },
+        "serializerId": {
+          "id": "6fe9b101-2f03-4589-9775-735c646b2f32"
+        },
+        "updateRate": 1,
+        "clientPredicted": true,
+        "allowInstantiateOnClient": true,
+        "sceneObjectDestroyOnDetach": true,
+        "sceneObjectAutoAttach": true
+      }
+    ],
+    "entityHitboxes": [],
+    "childItems": []
+  },
+  {
+    "name": "Archer-Arrow",
+    "entityComponents": [
+      {
+        "prefabId": {
+          "Value": 12
+        },
+        "serializerId": {
+          "id": "bf67afaa-3381-4601-b4ce-ca85352c41d5"
+        },
+        "updateRate": 1,
+        "clientPredicted": true,
+        "allowInstantiateOnClient": true,
+        "sceneObjectDestroyOnDetach": true,
+        "sceneObjectAutoAttach": true
+      }
+    ],
+    "entityHitboxes": [],
+    "childItems": []
+  },
+  {
+    "name": "ArcherPrefab",
+    "entityComponents": [
+      {
+        "prefabId": {
+          "Value": 13
+        },
+        "serializerId": {
+          "id": "6fe9b101-2f03-4589-9775-735c646b2f32"
+        },
+        "updateRate": 1,
+        "clientPredicted": true,
+        "allowInstantiateOnClient": true,
+        "sceneObjectDestroyOnDetach": true,
+        "sceneObjectAutoAttach": true
+      }
+    ],
+    "entityHitboxes": [],
+    "childItems": []
+  },
+  {
+    "name": "BasePlayerPrefab Variant",
+    "entityComponents": [
+      {
+        "prefabId": {
+          "Value": 14
+        },
+        "serializerId": {
+          "id": "6fe9b101-2f03-4589-9775-735c646b2f32"
+        },
+        "updateRate": 1,
+        "clientPredicted": true,
+        "allowInstantiateOnClient": true,
+        "sceneObjectDestroyOnDetach": true,
+        "sceneObjectAutoAttach": true
+      }
+    ],
+    "entityHitboxes": [],
+    "childItems": []
+  },
+  {
+    "name": "WarriorPrefab",
+    "entityComponents": [
+      {
+        "prefabId": {
+          "Value": 15
+        },
+        "serializerId": {
+          "id": "6fe9b101-2f03-4589-9775-735c646b2f32"
+        },
+        "updateRate": 1,
+        "clientPredicted": true,
+        "allowInstantiateOnClient": true,
+        "sceneObjectDestroyOnDetach": true,
+        "sceneObjectAutoAttach": true
+      }
+    ],
+    "entityHitboxes": [],
+    "childItems": []
+  }
+]
