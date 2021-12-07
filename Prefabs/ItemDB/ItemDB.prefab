@@ -1,0 +1,182 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &5834308859215581327
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2275266755508408580}
+  - component: {fileID: 5064355782865335662}
+  m_Layer: 0
+  m_Name: ItemDB
+  m_TagString: ItemDB
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2275266755508408580
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5834308859215581327}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 78.629036, y: 21.689398, z: 44.009693}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5064355782865335662
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5834308859215581327}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 920516b6f0773274eb8afe3ca0763730, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemDatabase:
+  - ID: 1
+    name: w_sword_1
+    prefab: {fileID: 5029158683663379792, guid: b5b0989a79d1f9240bbbd66f8ee2ebe5, type: 3}
+    icon: {fileID: 21300000, guid: 4ad16adfdf2d1a441879a598de742eb6, type: 3}
+    stackable: 1
+    stackSize: 1
+    description: "\u0411\u0430\u0437\u043E\u0432\u044B\u0439 \u041C\u0435\u0447"
+    skill: 1
+    type: 1
+    attackDistance: 2
+    damage: 0100000003000000
+    value: 0
+    specialAttack: 1
+    armor: 0
+    stat3: 0
+    materialID: 0
+    equipID: 0
+  - ID: 2
+    name: w_shield_1
+    prefab: {fileID: 3995573278399922598, guid: bf3de24db1d7a114fab0100b875cda74, type: 3}
+    icon: {fileID: 21300000, guid: a42b3b2bb82524b4c9e97aca1cb294fe, type: 3}
+    stackable: 1
+    stackSize: 1
+    description: "\u0411\u0430\u0437\u043E\u0432\u044B\u0439 \u0429\u0438\u0442"
+    skill: 3
+    type: 2
+    attackDistance: 0
+    damage: 0000000000000000
+    value: 2
+    specialAttack: 2
+    armor: 0
+    stat3: 0
+    materialID: 0
+    equipID: 0
+  - ID: 3
+    name: w_bow_1
+    prefab: {fileID: 7901350745378906310, guid: f212741e0747d8446b259cf408adc041, type: 3}
+    icon: {fileID: 21300000, guid: 5d7061fc7da05ce44add317708ec7215, type: 3}
+    stackable: 0
+    stackSize: 0
+    description: 
+    skill: 0
+    type: 2
+    attackDistance: 20
+    damage: 0000000000000000
+    value: 0
+    specialAttack: 0
+    armor: 0
+    stat3: 0
+    materialID: 0
+    equipID: 0
+  - ID: 4
+    name: w_arrow_1
+    prefab: {fileID: 3623264195715286442, guid: 971704aeace68fb4e830c4a6323d3589, type: 3}
+    icon: {fileID: 21300000, guid: 2346582b7dcd6c448a16661012ab2479, type: 3}
+    stackable: 0
+    stackSize: 0
+    description: 
+    skill: 0
+    type: 1
+    attackDistance: 20
+    damage: 0100000003000000
+    value: 0
+    specialAttack: 0
+    armor: 0
+    stat3: 0
+    materialID: 0
+    equipID: 0
+  - ID: 0
+    name: 
+    prefab: {fileID: 0}
+    icon: {fileID: 0}
+    stackable: 0
+    stackSize: 0
+    description: 
+    skill: 0
+    type: 0
+    attackDistance: 0
+    damage: 0000000000000000
+    value: 0
+    specialAttack: 0
+    armor: 0
+    stat3: 0
+    materialID: 0
+    equipID: 0
+  - ID: 5
+    name: a_Gloves_1
+    prefab: {fileID: 1426869672077528679, guid: a9708d89a43cafe48835f526aea6e5b2, type: 3}
+    icon: {fileID: 21300000, guid: 9c443e725aede404ab4a473f96e7f585, type: 3}
+    stackable: 0
+    stackSize: 1
+    description: "\u0411\u0430\u0437\u043E\u0432\u044B\u0435 \u041F\u0435\u0440\u0447\u0430\u0442\u043A\u0438"
+    skill: 0
+    type: 6
+    attackDistance: 0
+    damage: 0000000000000000
+    value: 0
+    specialAttack: 3
+    armor: 5
+    stat3: 0
+    materialID: 0
+    equipID: 5
+  - ID: 6
+    name: a_Chest_1
+    prefab: {fileID: 1850459203188786389, guid: 1642616bf89d29b409966944e7280960, type: 3}
+    icon: {fileID: 21300000, guid: 9c8101d479c60d34185259c220494c61, type: 3}
+    stackable: 0
+    stackSize: 1
+    description: "\u0411\u0430\u0437\u043E\u0432\u044B\u0439 \u0414\u043E\u0441\u043F\u0435\u0445"
+    skill: 1
+    type: 4
+    attackDistance: 0
+    damage: 0000000000000000
+    value: 0
+    specialAttack: 0
+    armor: 10
+    stat3: 0
+    materialID: 0
+    equipID: 1
+  - ID: 7
+    name: a_Weapon_2
+    prefab: {fileID: 5029158683663379792, guid: b5b0989a79d1f9240bbbd66f8ee2ebe5, type: 3}
+    icon: {fileID: 21300000, guid: 97eb33f17282b874aafc04781652f343, type: 3}
+    stackable: 0
+    stackSize: 1
+    description: "\u0423\u043B\u0443\u0447\u0448\u0435\u043D\u043D\u044B\u0439 \u041C\u0435\u0447"
+    skill: 1
+    type: 1
+    attackDistance: 2
+    damage: 0200000005000000
+    value: 0
+    specialAttack: 0
+    armor: 0
+    stat3: 0
+    materialID: 0
+    equipID: 0
