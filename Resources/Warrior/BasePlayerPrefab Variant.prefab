@@ -1,0 +1,102 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &7908234867917008507
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 2298333780914646771, guid: facfea57fc05a6a49a1ad9165fd153b8, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3068259630419067765, guid: facfea57fc05a6a49a1ad9165fd153b8, type: 3}
+      propertyPath: _prefabId
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 3754498333675521511, guid: facfea57fc05a6a49a1ad9165fd153b8, type: 3}
+      propertyPath: m_Name
+      value: BasePlayerPrefab Variant
+      objectReference: {fileID: 0}
+    - target: {fileID: 7433355887185547193, guid: facfea57fc05a6a49a1ad9165fd153b8, type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7433355887185547193, guid: facfea57fc05a6a49a1ad9165fd153b8, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 32.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 7433355887185547193, guid: facfea57fc05a6a49a1ad9165fd153b8, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 23.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7433355887185547193, guid: facfea57fc05a6a49a1ad9165fd153b8, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 43.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 7433355887185547193, guid: facfea57fc05a6a49a1ad9165fd153b8, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7433355887185547193, guid: facfea57fc05a6a49a1ad9165fd153b8, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7433355887185547193, guid: facfea57fc05a6a49a1ad9165fd153b8, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7433355887185547193, guid: facfea57fc05a6a49a1ad9165fd153b8, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7433355887185547193, guid: facfea57fc05a6a49a1ad9165fd153b8, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7433355887185547193, guid: facfea57fc05a6a49a1ad9165fd153b8, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7433355887185547193, guid: facfea57fc05a6a49a1ad9165fd153b8, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 0}
+  m_SourcePrefab: {fileID: 100100000, guid: facfea57fc05a6a49a1ad9165fd153b8, type: 3}
+--- !u!1 &6459597698282269596 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3754498333675521511, guid: facfea57fc05a6a49a1ad9165fd153b8, type: 3}
+  m_PrefabInstance: {fileID: 7908234867917008507}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &8575752236192451898
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6459597698282269596}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 155943207, guid: 5b00bf8b25851d440940a40ec23344f4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _sceneGuid: 
+  _serializerGuid: 6fe9b101-2f03-4589-9775-735c646b2f32
+  _prefabId: 14
+  _updateRate: 1
+  _autoFreezeProxyFrames: 0
+  _clientPredicted: 1
+  _allowInstantiateOnClient: 1
+  _persistThroughSceneLoads: 0
+  _sceneObjectDestroyOnDetach: 1
+  _sceneObjectAutoAttach: 1
+  _alwaysProxy: 0
+  _detachOnDisable: 1
+  _allowFirstReplicationWhenFrozen: 0
+  _autoRemoveChildEntities: 0
+  _entityBehaviourQueryOption: 0
+  _entityPriorityCalculatorQueryOption: 1
+  _entityReplicationFilterQueryOption: 1
