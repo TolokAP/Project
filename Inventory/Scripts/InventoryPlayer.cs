@@ -190,6 +190,8 @@ namespace Player
 
 
         }
+        
+
 
         public void refreshItem(List<GameObject> gameObjects, NetworkArray_Objects<item> myState)
         {

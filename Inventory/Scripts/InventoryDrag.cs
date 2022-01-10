@@ -17,7 +17,7 @@ namespace Player
         public Transform startParent;
         public GameObject dragPosition;
        
-        public GameObject info;
+       
 
 
         public void OnPointerClick(PointerEventData eventData)

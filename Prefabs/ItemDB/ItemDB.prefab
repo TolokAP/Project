@@ -27,6 +27,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 78.629036, y: 21.689398, z: 44.009693}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -81,7 +82,7 @@ MonoBehaviour:
   - ID: 3
     name: w_bow_1
     prefab: {fileID: 7901350745378906310, guid: f212741e0747d8446b259cf408adc041, type: 3}
-    icon: {fileID: 21300000, guid: 5d7061fc7da05ce44add317708ec7215, type: 3}
+    icon: {fileID: 21300000, guid: fb1e48043961d8f44948225f539a83bb, type: 3}
     stackable: 0
     stackSize: 0
     description: 
@@ -165,7 +166,7 @@ MonoBehaviour:
     equipID: 1
   - ID: 7
     name: a_Weapon_2
-    prefab: {fileID: 5029158683663379792, guid: b5b0989a79d1f9240bbbd66f8ee2ebe5, type: 3}
+    prefab: {fileID: 3995573278399922598, guid: bf3de24db1d7a114fab0100b875cda74, type: 3}
     icon: {fileID: 21300000, guid: 97eb33f17282b874aafc04781652f343, type: 3}
     stackable: 0
     stackSize: 1

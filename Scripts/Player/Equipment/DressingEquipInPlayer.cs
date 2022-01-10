@@ -86,9 +86,9 @@ namespace Player
         }
         public void ChangeEquipment(IState istate, string propertPath, ArrayIndices arrayIndices)//изменение слота экипировки оружия
         {
-          
-                //BoltLog.Warn("Работает метод смены экипировки из скрипта CombatSystem");
-                int index = arrayIndices[0];
+
+           
+            int index = arrayIndices[0];
 
                BoltLog.Warn("Работает метод смены экипировки " + index);
             if (propertPath == "Equipmnet[].quantity") return;
@@ -106,7 +106,10 @@ namespace Player
 
                     case TypeEquipment.weapon:
 
-
+                        if (HandR != null) //Проверяет на наличие оружия в руке
+                        {
+                            BoltNetwork.Destroy(HandR);
+                        }
                         var networkIDR = new NetworkIDToken
                         {
                             NetworkID = entity.NetworkId.PackedValue,
@@ -121,9 +124,15 @@ namespace Player
 
                         break;
                     case TypeEquipment.twoHandWeapon:
+                       
+                        if (HandL != null)//Проверяет на наличие оружия в руке
+                        {
+                            BoltNetwork.Destroy(HandL);
+                        }
                         var networkIDL = new NetworkIDToken
                         {
-                            NetworkID = entity.NetworkId.PackedValue,
+                            
+                        NetworkID = entity.NetworkId.PackedValue,
                             Hand = (int)WeaponHandPosition.Left
                         };
 
@@ -142,6 +151,11 @@ namespace Player
                     case TypeEquipment.chest:
 
                         DressingEquipment.Post(entity, 1, ItemData.materialID, true);
+
+                        break;
+                    case TypeEquipment.legs:
+
+                        DressingEquipment.Post(entity, 2, ItemData.materialID, true);
 
                         break;
 

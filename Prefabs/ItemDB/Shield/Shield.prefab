@@ -69,7 +69,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2771317798489935819, guid: 3af467ae8a016534e8fadc84ce8954a0, type: 3}
       propertyPath: _prefabId
-      value: 14
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 2771317798489935819, guid: 3af467ae8a016534e8fadc84ce8954a0, type: 3}
       propertyPath: _serializerGuid
@@ -106,37 +106,3 @@ PrefabInstance:
     m_RemovedComponents:
     - {fileID: 0}
   m_SourcePrefab: {fileID: 100100000, guid: 3af467ae8a016534e8fadc84ce8954a0, type: 3}
---- !u!1 &3995573278399922598 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 9082082753200029451, guid: 3af467ae8a016534e8fadc84ce8954a0, type: 3}
-  m_PrefabInstance: {fileID: 5294309699475373741}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &-1815036407858251038
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3995573278399922598}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 155943207, guid: 5b00bf8b25851d440940a40ec23344f4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _sceneGuid: 
-  _serializerGuid: 81a091cf-cbcc-4203-af0c-b67df75e0e6e
-  _prefabId: 9
-  _updateRate: 1
-  _autoFreezeProxyFrames: 0
-  _clientPredicted: 1
-  _allowInstantiateOnClient: 1
-  _persistThroughSceneLoads: 0
-  _sceneObjectDestroyOnDetach: 1
-  _sceneObjectAutoAttach: 1
-  _alwaysProxy: 0
-  _detachOnDisable: 1
-  _allowFirstReplicationWhenFrozen: 0
-  _autoRemoveChildEntities: 0
-  _entityBehaviourQueryOption: 0
-  _entityPriorityCalculatorQueryOption: 1
-  _entityReplicationFilterQueryOption: 1

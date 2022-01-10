@@ -50,6 +50,7 @@ namespace Player
             { BoltLog.Warn("Пустой слот"); }
             else
             {
+                
                 var evnt = swapSlots.Create(GlobalTargets.OnlySelf);
                 evnt.from = inventorySlot.GetComponent<InventoryPlayer>().selectedSlot.GetComponent<InventoryDrop>().slot;
                 evnt.to = slot;
@@ -62,6 +63,8 @@ namespace Player
 
         }
        
+
+
         public void OnPointerEnter(PointerEventData eventData)
         {
           

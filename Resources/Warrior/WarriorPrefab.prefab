@@ -424,35 +424,6 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 10
   m_Center: {x: -0.00000011920929, y: 0.83, z: -0.00000014901161}
---- !u!114 &3914928109922885490
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2798696233101723118}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 155943207, guid: 5b00bf8b25851d440940a40ec23344f4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _sceneGuid: 00000000-0000-0000-0000-000000000000
-  _serializerGuid: 6fe9b101-2f03-4589-9775-735c646b2f32
-  _prefabId: 15
-  _updateRate: 1
-  _autoFreezeProxyFrames: 0
-  _clientPredicted: 1
-  _allowInstantiateOnClient: 1
-  _persistThroughSceneLoads: 0
-  _sceneObjectDestroyOnDetach: 1
-  _sceneObjectAutoAttach: 1
-  _alwaysProxy: 0
-  _detachOnDisable: 1
-  _allowFirstReplicationWhenFrozen: 0
-  _autoRemoveChildEntities: 0
-  _entityBehaviourQueryOption: 0
-  _entityPriorityCalculatorQueryOption: 1
-  _entityReplicationFilterQueryOption: 1
 --- !u!4 &8495137968997453744 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7433355887185547193, guid: facfea57fc05a6a49a1ad9165fd153b8, type: 3}
@@ -934,6 +905,10 @@ PrefabInstance:
     - target: {fileID: 5630060832765085304, guid: 844657385f130b04ab8a7991ac40261a, type: 3}
       propertyPath: m_TagString
       value: Untagged
+      objectReference: {fileID: 0}
+    - target: {fileID: 5866666021909216657, guid: 844657385f130b04ab8a7991ac40261a, type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5866666021909216657, guid: 844657385f130b04ab8a7991ac40261a, type: 3}
       propertyPath: m_Controller

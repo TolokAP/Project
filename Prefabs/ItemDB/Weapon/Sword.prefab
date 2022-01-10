@@ -13,11 +13,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1119707692239185089, guid: 3af467ae8a016534e8fadc84ce8954a0, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -5.8
+      value: -5.626
       objectReference: {fileID: 0}
     - target: {fileID: 1119707692239185089, guid: 3af467ae8a016534e8fadc84ce8954a0, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.15
+      value: -0.083
       objectReference: {fileID: 0}
     - target: {fileID: 1119707692239185089, guid: 3af467ae8a016534e8fadc84ce8954a0, type: 3}
       propertyPath: m_LocalPosition.z
@@ -61,7 +61,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2771317798489935819, guid: 3af467ae8a016534e8fadc84ce8954a0, type: 3}
       propertyPath: _prefabId
-      value: 15
+      value: 16
       objectReference: {fileID: 0}
     - target: {fileID: 2771317798489935819, guid: 3af467ae8a016534e8fadc84ce8954a0, type: 3}
       propertyPath: _serializerGuid
@@ -4907,32 +4907,3 @@ ParticleSystemRenderer:
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
   m_MaskInteraction: 0
---- !u!114 &2357561346158754911
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5029158683663379792}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 155943207, guid: 5b00bf8b25851d440940a40ec23344f4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _sceneGuid: 
-  _serializerGuid: 81a091cf-cbcc-4203-af0c-b67df75e0e6e
-  _prefabId: 10
-  _updateRate: 1
-  _autoFreezeProxyFrames: 0
-  _clientPredicted: 1
-  _allowInstantiateOnClient: 1
-  _persistThroughSceneLoads: 0
-  _sceneObjectDestroyOnDetach: 1
-  _sceneObjectAutoAttach: 1
-  _alwaysProxy: 0
-  _detachOnDisable: 1
-  _allowFirstReplicationWhenFrozen: 0
-  _autoRemoveChildEntities: 0
-  _entityBehaviourQueryOption: 0
-  _entityPriorityCalculatorQueryOption: 1
-  _entityReplicationFilterQueryOption: 1
