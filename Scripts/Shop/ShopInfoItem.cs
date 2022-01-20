@@ -12,7 +12,7 @@ namespace Player{
     public class ShopInfoItem : MonoBehaviour, IPointerClickHandler
     {
         private int _id;
-        private ItemDB _ItemDB;
+        public ItemDatabase itemDatabase;
         [SerializeField] private Image _icon;
         [SerializeField] private Text _name;
         [SerializeField] private GameObject _infoItem;
@@ -24,25 +24,14 @@ namespace Player{
 
         private void Start()
         {
-            _ItemDB = GameObject.Find("ItemDB").GetComponent<ItemDB>();
-            _itemData = lookUpID(_id);
-            _icon.sprite = _itemData.icon;
-            _name.text = _itemData.name;
-            _ability.text = _itemData.specialAttack.ToString();
+           
+            _itemData = itemDatabase.LookIDItem(_id);
+            _icon.sprite = _itemData.GetIconItem;
+            _name.text = _itemData.GetDiscription;
+            _ability.text = _itemData.GetSpecialAttack.ToString();
         }
         
-        public ItemData lookUpID(int ID)
-        {
-            foreach (ItemData ItemData in _ItemDB.itemDatabase)
-            {
-                if (ItemData.ID == ID)
-                {
-                    return ItemData;
-                }
-            }
-            return null;
-
-        }
+       
 
         public void SetID(int id)
         {

@@ -208,9 +208,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1b7266d57e99f9c43a81c091a14b2975, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  itemDatabase: {fileID: 0}
   EquipID: []
   material: []
-  _itemDB: {fileID: 0}
   HandL: {fileID: 0}
   HandR: {fileID: 0}
   _combatsystem: {fileID: 0}

@@ -46,7 +46,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mySlots: []
-  ItemDB: {fileID: 0}
+  ItemDatabase: {fileID: 0}
   selectedSlot: {fileID: 0}
   slot: {fileID: 2871346658360742697, guid: 0432487b2875d9d42ac7195396d25894, type: 3}
   _item: {fileID: 5951537955720413866, guid: 5f1ea6f058139f047ae70b9b029c4e68, type: 3}

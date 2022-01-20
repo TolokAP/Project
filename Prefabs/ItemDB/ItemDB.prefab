@@ -165,19 +165,21 @@ MonoBehaviour:
     materialID: 0
     equipID: 1
   - ID: 7
-    name: a_Weapon_2
-    prefab: {fileID: 3995573278399922598, guid: bf3de24db1d7a114fab0100b875cda74, type: 3}
-    icon: {fileID: 21300000, guid: 97eb33f17282b874aafc04781652f343, type: 3}
+    name: a_Healmet_1
+    prefab: {fileID: 4199651909987667370, guid: a71e913c29fab6846a1140832c9f4801, type: 3}
+    icon: {fileID: 21300000, guid: eae63278b55669b45a965dbfe14b6615, type: 3}
     stackable: 0
     stackSize: 1
-    description: "\u0423\u043B\u0443\u0447\u0448\u0435\u043D\u043D\u044B\u0439 \u041C\u0435\u0447"
+    description: "\u0411\u0430\u0437\u043E\u0432\u044B\u0439 \u0428\u043B\u0435\u043C"
     skill: 1
-    type: 1
-    attackDistance: 2
-    damage: 0200000005000000
+    type: 3
+    attackDistance: 0
+    damage: 0000000000000000
     value: 0
     specialAttack: 0
-    armor: 0
+    armor: 10
     stat3: 0
     materialID: 0
     equipID: 0
+  item2:
+  - {fileID: 11400000, guid: 5ce4647e157d2bf4a9b707396be4f454, type: 2}

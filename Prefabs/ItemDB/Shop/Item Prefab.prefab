@@ -1230,10 +1230,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f5fcecc07f46740459575e16a7f92c1e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  itemDatabase: {fileID: 11400000, guid: 47944935f792e1f478e3aa38d6360aa6, type: 2}
   _icon: {fileID: 1081706559364659561}
   _name: {fileID: 1081706559145797068}
   _infoItem: {fileID: 4540652252852880201, guid: b4d771e0e4ca8074e8446e9cb857dba9, type: 3}
   _ability: {fileID: 2260706473505295703}
+  _inventoryPlayerController: {fileID: 0}
 --- !u!114 &1081706559525838606
 MonoBehaviour:
   m_ObjectHideFlags: 0

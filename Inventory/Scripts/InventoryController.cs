@@ -10,7 +10,8 @@ namespace Player
     public class InventoryController : MonoBehaviour
     {
         public GameObject selectedSlot;
-        public ItemDB ItemDB;
+     
+        public ItemDatabase ItemDatabase; 
 
         public List<GameObject> mySlots;
         public InventoryPlayerController PlayerController;
@@ -18,11 +19,7 @@ namespace Player
         public GameObject item;
 
         // Use this for initialization
-        void Start()
-        {
-            ItemDB = GameObject.Find("ItemDB").GetComponent<ItemDB>();
-        }
-
+       
         public void refreshItem(int i)
         {
 
@@ -68,11 +65,11 @@ namespace Player
             //check if slot exists and is available (on server, this is just ui logic)
 
             GameObject newItem = Instantiate(item);
-            ItemData ItemData = lookUpID(ID);
+            ItemData ItemData = ItemDatabase.LookIDItem(ID); 
             if (ItemData != null)
             {
-                if (ItemData.icon != null)
-                    newItem.GetComponent<Image>().sprite = ItemData.icon;
+                if (ItemData.GetIconItem != null)
+                    newItem.GetComponent<Image>().sprite = ItemData.GetIconItem;
             }
 
             if (quantity > 1)
@@ -115,17 +112,6 @@ namespace Player
             refreshItems();
         }
 
-        public ItemData lookUpID(int ID)
-        {
-            foreach (ItemData ItemData in ItemDB.itemDatabase)
-            {
-                if (ItemData.ID == ID)
-                {
-                    return ItemData;
-                }
-            }
-            return null;
-
-        }
+      
     }
 }

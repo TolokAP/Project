@@ -6,28 +6,17 @@ using Photon.Bolt.Utils;
 
 namespace Player
 {
-    [BoltGlobalBehaviour(BoltNetworkModes.Server, "GameScene")]
+  
     public class ServerItemControl : GlobalEventListener
     {
-        public ItemDB itemDB;
+        public ItemDatabase itemDatabase;
       
-        public ItemData lookUpID(int ID)// Получение предмета из базы предметов.
-        {
-           
-            foreach (ItemData ItemData in itemDB.itemDatabase)
-            {
-                if (ItemData.ID == ID)
-                {
-                    return ItemData;
-                }
-            }
-            return null;
-
-        }
+       
 
         public override void SceneLoadLocalDone(string scene, IProtocolToken token)
         {
-            itemDB = GameObject.FindGameObjectWithTag("ItemDB").GetComponent<ItemDB>();
+            
+            
         }
         
 
@@ -40,7 +29,7 @@ namespace Player
                 NetworkID = evnt.NetworkID.PackedValue,
                 ID = evnt.ID
             };
-            BoltNetwork.Instantiate(lookUpID(evnt.ID).prefab, NetIDToken);
+            BoltNetwork.Instantiate(itemDatabase.LookIDItem(evnt.ID).GetPrefabItem, NetIDToken);
 
 
         }

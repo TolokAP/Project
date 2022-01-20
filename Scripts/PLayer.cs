@@ -25,6 +25,6 @@ namespace Player
 
     }
    
-    public enum CombatsSkills { Archery, Swordsmanship, Fencing, Parring }// Умения для оружия
+   
     public enum StatsPlayer { Strengh, Agility, Stamina, Power, }// Параметр персонажа
 }

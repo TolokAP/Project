@@ -17,16 +17,7 @@ namespace Player
         Player
       
     }
-    public enum SpecialAttack
-    {
-        none,
-        doubleDamage ,
-        activeShield,
-        stun,
-      
-        
-
-    }
+   
     public class CombatSystem : EntityEventListener<IPlayer>
     {
         public Button SpecialBtn;
@@ -76,16 +67,13 @@ namespace Player
         {
             if (entity.IsOwner)
             {
-                _attackDistance = (int)item.attackDistance;
-                combatsSkills = item.skill;
+                _attackDistance = (int)item.GetAttackDistance;
+                combatsSkills = item.GetCombatsSkill;
                 state.CombatSkill = combatsSkills.GetHashCode();
-              
-                               
-                for (int i = 0; i < _damage.Length; i++)
-                {
-                    _damage[i] = item.damage[i];
 
-                }
+
+                _damage[0] = item.GetMinDamageWeapon;
+                _damage[1] = item.GetMaxDamageWeapon;
                 _HandR = weapon;
             }
         }

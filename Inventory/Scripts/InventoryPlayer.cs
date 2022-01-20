@@ -12,7 +12,8 @@ namespace Player
     {
         public List<GameObject> mySlots;
 
-        public ItemDB ItemDB;
+        public ItemDatabase ItemDatabase;
+
 
         public GameObject selectedSlot;
         public GameObject slot;
@@ -25,7 +26,7 @@ namespace Player
         public List<GameObject> myEquipment = new List<GameObject>(8);
         public Dictionary<SpecialAttack, string> abilityDiscription;
 
-
+        
         public void Start()
         {
             abilityDiscription = new Dictionary<SpecialAttack, string>
@@ -35,7 +36,12 @@ namespace Player
                 { SpecialAttack.activeShield, "Щит - блокирует весь урон на 7 секунд" },
                  { SpecialAttack.none, "-" }
             };
+           
+
         }
+    
+
+       
         #region Методы управления информацией по предмету
         public void OpenWindowItemInfo(Transform parent,int slotId) //Создание информационного окна по предмету
         {
@@ -62,22 +68,22 @@ namespace Player
 
         private void GetInfoItem(int slotId)//Получение информации  о предмете и передача информации вновь созданному информационному окну
         {
-            int Id = PlayerController.boltEntity.GetState<IPlayer>().items[slotId].ID;
-            ItemData itemData = lookUpID(Id);
+            int _id = PlayerController.boltEntity.GetState<IPlayer>().items[slotId].ID;
+            ItemData itemData = ItemDatabase.LookIDItem(_id);
             string _itemDamageinfo;
-            switch (itemData.type) // Выбор надписи в зависимости от того какого типа предмет
+            switch (itemData.GetTypeEquipment) // Выбор надписи в зависимости от того какого типа предмет
             {
                 case TypeEquipment.weapon:
-                    _itemDamageinfo = "Урон: " + itemData.damage[0] + " - " + itemData.damage[1];
+                    _itemDamageinfo = "Урон: " + itemData.GetMinDamageWeapon + " - " + itemData.GetMaxDamageWeapon;
                     break;
                 default:
-                    _itemDamageinfo = "Броня: " + itemData.armor;
+                    _itemDamageinfo = "Броня: " + itemData.GetArmorItem;
                     break;
 
             }
 
            
-            _infoItem.GetComponent<InfoItem>().SetStringInfo(itemData.description, _itemDamageinfo,abilityDiscription[itemData.specialAttack]);//Передача вновь созданному предмету параметров для отображения
+            _infoItem.GetComponent<InfoItem>().SetStringInfo(itemData.GetDiscription, _itemDamageinfo,abilityDiscription[itemData.GetSpecialAttack]);//Передача вновь созданному предмету параметров для отображения
 
 
 
@@ -86,20 +92,10 @@ namespace Player
 
         #endregion
 
+      
+      
 
-
-        public ItemData lookUpID(int ID)
-        {
-            foreach (ItemData ItemData in ItemDB.itemDatabase)
-            {
-                if (ItemData.ID == ID)
-                {
-                    return ItemData;
-                }
-            }
-            return null;
-
-        }
+        
         public bool returnType(TypeEquipment type,int slot)//Проверка на тип слота в экипировке
         {
             if (type==myEquipment[slot].GetComponent<InventoryDrop>().typeEquipment) return true;
@@ -118,7 +114,7 @@ namespace Player
                 myEquipment[i].GetComponent<InventoryDrop>().slot = i;
             }
 
-
+            
         }
 
         public void instantiateSlot(Vector3 position, int ID)
@@ -174,11 +170,11 @@ namespace Player
             //check if slot exists and is available (on server, this is just ui logic)
 
             GameObject newItem = Instantiate(_item);
-            ItemData ItemData = lookUpID(ID);
+            ItemData ItemData = ItemDatabase.LookIDItem(ID);
             if (ItemData != null)
             {
-                if (ItemData.icon != null)
-                    newItem.GetComponent<Image>().sprite = ItemData.icon;
+                if (ItemData.GetIconItem != null)
+                    newItem.GetComponent<Image>().sprite = ItemData.GetIconItem;
             }
 
             if (quantity > 1)

@@ -11,8 +11,8 @@ namespace Player
     {
         public InventoryPlayer myInventory;
         public BoltEntity boltEntity;
+     
 
-       
         private SwapType _swapType;
 
 
@@ -28,8 +28,9 @@ namespace Player
             }
            
         }
+      
 
-        
+
 
         public void swapSlots(swapSlots evnt)
         {
@@ -49,7 +50,7 @@ namespace Player
             else if (_swapType == SwapType.toEquipment)
             {
                 BoltLog.Warn("В Экипировку");
-                if (!myInventory.returnType(myInventory.lookUpID(state.items[evnt.from].ID).type, evnt.to)) return;
+                if (!myInventory.returnType(myInventory.ItemDatabase.LookIDItem(state.items[evnt.from].ID).GetTypeEquipment, evnt.to)) return;
                 else { ChangeItemInventory(state.Equipmnet, state.items, evnt.to, evnt.from); }
             }
             else
@@ -80,14 +81,14 @@ namespace Player
 
             if (myStateTo[to].ID == myStateFrom[from].ID)
             {
-                if (myInventory.lookUpID(myStateTo[to].ID).stackable)
+                if (myInventory.ItemDatabase.LookIDItem(myStateTo[to].ID).GetItemStackable)
                 {
-                    if (myInventory.lookUpID(myStateTo[to].ID).stackSize > myStateTo[to].quantity)
+                    if (myInventory.ItemDatabase.LookIDItem(myStateTo[to].ID).GetStackSize > myStateTo[to].quantity)
                     {
                         int moveQuanity = 0;
                         //how many item units are moving
 
-                        int moveSpace = myInventory.lookUpID(myStateTo[to].ID).stackSize - myStateTo[to].quantity;
+                        int moveSpace = myInventory.ItemDatabase.LookIDItem(myStateTo[to].ID).GetStackSize - myStateTo[to].quantity;
                         //how much room is available in "to"
 
                         int fromQuantity = myStateFrom[from].quantity;
@@ -184,8 +185,8 @@ namespace Player
         public void addItem(int ID, int quantity)
         {
             //if stackable try adding to non full stacks
-            ItemData ItemData = myInventory.lookUpID(ID);
-            if (ItemData.stackable)
+            ItemData ItemData = myInventory.ItemDatabase.LookIDItem(ID);
+            if (ItemData.GetItemStackable)
             {
                 int currentQuantity = quantity;
 
@@ -194,11 +195,11 @@ namespace Player
                 {
                     if (state.items[i].ID == ID)
                     {
-                        if (state.items[i].quantity < ItemData.stackSize)
+                        if (state.items[i].quantity < ItemData.GetStackSize)
                         {
                             int moveQuanity;
 
-                            int moveSpace = ItemData.stackSize - state.items[i].quantity;
+                            int moveSpace = ItemData.GetStackSize - state.items[i].quantity;
 
                             if (moveSpace >= quantity)
                             {
