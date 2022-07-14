@@ -16,6 +16,12 @@ MonoBehaviour:
   - DisplayName: AuthResultToken
     AssemblyName: AuthResultToken, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
       PublicKeyToken=null
+  - DisplayName: LoadStatePlayer
+    AssemblyName: LoadStatePlayer, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+  - DisplayName: LootEquipID
+    AssemblyName: LootEquipID, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
   - DisplayName: NetworkIDToken
     AssemblyName: NetworkIDToken, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
       PublicKeyToken=null

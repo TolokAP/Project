@@ -4,6 +4,8 @@ using UnityEngine;
 using UnityEngine.UI;
 using Photon.Bolt;
 using Photon.Bolt.Utils;
+using TMPro;
+
 namespace Player {
     public class UIPlayer : MonoBehaviour
     {
@@ -18,16 +20,19 @@ namespace Player {
         [SerializeField]
         private GameObject prefabLabel;
 
+       
+
         public List<Sprite> spritesIconSpecialAttack;
         public List<Image> iconSpecialAttack;
 
-
+        
 
         public List<GameObject> gameObjectsUI;
         public List<GameObject> gameObjectsSkill;
-
-
-
+        [SerializeField]
+        private TMP_Text _armorText;
+        [SerializeField]
+        private TMP_Text _damageText;
         public List<string> stats = new List<string>()
     {
       {"Характеристики" },  {"Сила" }, {"Ловкость" }, {"Выносливость" }, {"Мощь" }, {"Умения" }, {"Луки" }, {"Мечи" }, {"Мощь" }
@@ -75,6 +80,21 @@ namespace Player {
             if (!string.IsNullOrEmpty(value)) obj.GetComponentInChildren<Text>().text = value;
 
         }
+
+     
+
+        public void UpdateArmorText(string value)
+        {
+
+            _armorText.text = value;
+        }
+
+
+        public void UpdateDamageUI(string value)
+        {
+            _damageText.text = value;
+        }
+
 
         private void CreateUICharacter()
         {
@@ -132,7 +152,12 @@ namespace Player {
 
 
 
+        public void ResurrectionPlayer()
+        {
 
+
+
+        }
 
 
 

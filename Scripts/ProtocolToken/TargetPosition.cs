@@ -18,6 +18,7 @@ public class TargetPosition : Photon.Bolt.IProtocolToken
         NetworkIDOwner = packet.ReadULong();
 
         Damage = packet.ReadInt();
+        
 
 
     }

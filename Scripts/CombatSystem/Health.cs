@@ -23,52 +23,54 @@ namespace Player
         public Transform SpwanUIText;
 
         private int _totalDamage;
-        
+
+
    
-        
+
+
+
 
         public override void Attached()
         {
-            if (entity.IsOwner)
-            {
+            if (!entity.IsOwner) return;
 
-                GO = GetComponent<BoltEntity>();
-                state.AddCallback("CurrentHealth", CurrentHealthCallBack);//Обратный вызов Текущее здоровье
-                state.AddCallback("TotalHealth", MaxHealthCallBack);//Обратный вызов максимальное здоровье
-                SetHealthPlayer();
-                UpdateUIMaxHealth();
+            GO = GetComponent<BoltEntity>();
+            state.AddCallback("CurrentHealth", CurrentHealthCallBack);//Обратный вызов Текущее здоровье
+            state.AddCallback("TotalHealth", MaxHealthCallBack);//Обратный вызов максимальное здоровье
+            SetHealthPlayer();
+            UpdateUIMaxHealth();
            
-            }
+            
 
         }
 
         private void CurrentHealthCallBack()
         {
-            if (entity.IsOwner)
-            {
-                localHealth = state.CurrentHealth;  
-                UpdateUIPlayer();
-            }
-            if (localHealth <= 0)
-            {
-                state.CurrentHealth = 0;
-                state.DeathTrigger();
-                state.Dead = true;
-                _ = DeadPlayer.Post(GO, true);
+            //if (entity.IsOwner)
+            //{
+            //    localHealth = state.CurrentHealth;
+            //    UpdateUIPlayer();
 
-                //BoltNetwork.Destroy(gameObject);
-            }
+            //    if (localHealth <= 0)
+            //    {
+            //        state.CurrentHealth = 0;
+            //        state.DeathTrigger();
+            //        state.Dead = true;
+            //        _ = DeadPlayer.Post(GO, true);
 
+            //        //BoltNetwork.Destroy(gameObject);
+            //    }
+            //}
         }
 
         private void MaxHealthCallBack()
         {
 
-            if (entity.IsOwner)
-            {
-                _maxHealth = state.TotalHealth;
-                UpdateUIPlayer();
-            }
+            if (!entity.IsOwner) return; 
+            
+            _maxHealth = state.TotalHealth;
+            UpdateUIPlayer();
+            
 
         }
 
@@ -122,7 +124,7 @@ namespace Player
                 {
                     if (state.Armor > 0)
                     {
-                         _totalDamage = (int)(evnt.Damage * state.Armor);
+                         _totalDamage = (int)(evnt.Damage);
                     }
                     else
                     {
@@ -152,7 +154,7 @@ namespace Player
             }
         }
 
-
+       
         public override void OnEvent(SpecialActiveShield evnt)
         {
             if (evnt.FromSelf)

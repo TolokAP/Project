@@ -7,7 +7,7 @@ using UnityEngine.EventSystems;
 namespace Player {
     public class InfoItem : MonoBehaviour, IPointerClickHandler
     {
-        public int slotID;
+     
         [SerializeField]
         private TMP_Text _nameItem;
         [SerializeField]

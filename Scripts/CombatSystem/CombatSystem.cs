@@ -33,6 +33,7 @@ namespace Player
 
         [SerializeField]
         public int _attackDistance { get; set; }//Дистанция атаки
+
         public CombatsSkills combatsSkills;
        
 
@@ -52,8 +53,7 @@ namespace Player
 
         private ScriptMethodsSkill MethodsSkill;
         
-        [SerializeField]
-        private int[] _damage = new int[2];
+    
 
         [SerializeField]
         private GameObject _ForceShield;
@@ -65,17 +65,14 @@ namespace Player
 
       public void SetParametrOfWeapon(ItemData item,GameObject weapon)// Смена параметров оружия, при смете в экпировке(Дистанция, Умение, Урон, Наличие Оружия)
         {
-            if (entity.IsOwner)
-            {
-                _attackDistance = (int)item.GetAttackDistance;
-                combatsSkills = item.GetCombatsSkill;
-                state.CombatSkill = combatsSkills.GetHashCode();
-
-
-                _damage[0] = item.GetMinDamageWeapon;
-                _damage[1] = item.GetMaxDamageWeapon;
-                _HandR = weapon;
-            }
+            if (!entity.IsOwner) return;
+            
+            _attackDistance = (int)item.GetAttackDistance;
+            state.Damage[0] = item.GetMinDamageWeapon;
+            state.Damage[1] = item.GetMaxDamageWeapon;
+           
+            _HandR = weapon;
+            
         }
 
        
@@ -86,29 +83,52 @@ namespace Player
        
         public override void Attached()
         {
-            if(BoltNetwork.IsClient){
-                if (entity.IsOwner)
-                {
+            if (!BoltNetwork.IsClient) return;
 
-                    SetButton();
+            if (!entity.IsOwner) return;
+    
+            SetButton();
                   
-                    targetNumber = 0;
+            targetNumber = 0;
 
-                    state.SetTransforms(state.Transform, transform);
-                    state.SetAnimator(GetComponent<Animator>());
+            state.SetTransforms(state.Transform, transform);
+            state.SetAnimator(GetComponent<Animator>());
 
-                    state.Animator.applyRootMotion = entity.IsOwner;
+            state.Animator.applyRootMotion = entity.IsOwner;
 
-                    state.Animationspeed = 1f;
+            state.Animationspeed = 1f;
 
-                  
+            state.AddCallback("CombatSkill", ChangeCombatSkill);
+                   
 
-                }
-            }
+
+
+                
+            
         }
 
+     
+
+        #region СallBack Photon Bolt
+
+        private void ChangeCombatSkill(IState state2, string propertyPath, ArrayIndices arrayIndices)
+        {
+            if (!entity.IsOwner) return;
+            
+            combatsSkills = (CombatsSkills)state.CombatSkill;
+            
+        }
+
+   
+
+
+        #endregion
         public override void SimulateOwner()
         {
+
+            if (TargetGameObject == null) return;
+
+            UpdateUITarget();
 
         }
 
@@ -116,22 +136,26 @@ namespace Player
 
         public override void OnEvent(SetDamage evnt)
         {
-            if (evnt.Target.IsOwner&& evnt.InfoMessage)
+            if (evnt.Target.IsOwner && evnt.InfoMessage)
             {
+
                 if (evnt.Damage >= 1)
                 {
                     TargetGameObject.GetComponent<Health>().AnimationDamage(evnt.Damage.ToString());
-              
+                    
+                    UpdateUITarget();
+
                 }
                 else
                 {
-                
+
                     TargetGameObject.GetComponent<Health>().AnimationDamage("Блок");
                 }
-
-
-
+                
             }
+
+           
+
         }
 
         public override void OnEvent(SpecialActiveShield evnt)
@@ -141,15 +165,15 @@ namespace Player
         }
         public override void OnEvent(EventSpecialAttack evnt)
         {
-            if (evnt.TargEntity.IsOwner)
-            {
-                if (!state.Stunned)
-                {
-                    state.StunTrigger();
-                    state.Stunned = true;
-                    StartCoroutine(StopStunCoroutine());
-                }
-            }
+            if (!evnt.TargEntity.IsOwner) return; // Проверяет владельца которому наносят урон
+
+            if (state.Stunned) return;// Если уже оглушен, то оглушение не проходит
+                
+            state.StunTrigger();
+            state.Stunned = true;
+            StartCoroutine(StopStunCoroutine());
+                
+            
         }
 
         #endregion
@@ -168,54 +192,48 @@ namespace Player
 
         public void AttackFinish()//Событие анимации. Окончание атаки
         {
-            if (entity.IsOwner)
-            {
+            if (!entity.IsOwner) return;
+            
                 UpSkill(combatsSkills);
                 BoltLog.Warn("Конец Атаки");
                 state.Attack = false;
 
-                //if (GetDistanceToTarget() < _attackDistance&& !state.Moving)
-                //{
-                //    Attack();
-                //    BoltLog.Warn("Повторная атака");
-                //}
-            }
+            
         }
 
         public void Hit(int multiplicator)//Событие анимации Атаки - Вариор
         {
-            if (entity.IsOwner)
-            {
+            if (!entity.IsOwner) return;
+            
                 int value=GetDamage(multiplicator);
 
                 SetDamage.Post(TargetEntity, value,TargetEntity,false,entity);
                              
-
                 BoltLog.Warn("Атака");
               
 
-            }
+            
         }
        public void Buf()//Специальное умение Щит
         {
 
-            if (entity.IsOwner)
-            {
+            if (!entity.IsOwner) return;
+            
                 BoltLog.Warn("Защита");
                 SpecialActiveShield.Post(entity, 0.01f,true);
                 _ForceShield.SetActive(true);
                 StartCoroutine(StopBufCoroutine());
-            }
+            
         }
 
         public void Stuned()//Специальное умение Оглушение
         {
-            if (entity.IsOwner)
-            {
+            if (!entity.IsOwner) return;
+            
                 BoltLog.Warn("Оглушение");
                 EventSpecialAttack.Post(TargetEntity, true,TargetEntity);
              
-            }
+            
 
 
 
@@ -274,7 +292,7 @@ namespace Player
         #region Атака
         private bool CheckOpportunityAttack()// Проверяет: Владельца сущности, есть ли обьект атаки, Фаза атаки, дистанцию до цели, живая цель, не умер игрок, режим атаки
         {
-            if (entity.IsOwner &&
+            if (
                 TargetGameObject != null &&
                 !state.Attack &&
                 GetDistanceToTarget() <= _attackDistance &&
@@ -287,34 +305,35 @@ namespace Player
             }
             else return false;
         }
-        private bool CheckPosibilityActiveShield()//проверка возмодности использовать спецаильное умение (Щит)
+        private bool CheckPosibilityActiveShield()//проверка возмодности использовать специальное умение (Щит)
         {
             if (entity.IsOwner &&
                 !state.Dead && !
                 !state.Stunned) return true;
             else return false;
         }
-       
+
 
         public void Attack()// Метод аттаки. Установлен на кнопке
         {
-            if (entity.IsOwner)
+            if (!entity.IsOwner) return;
+            
+            if (_HandR == null)
             {
-                if (_HandR == null)
-                {
-                    LogEvent.Post(entity, "Нет оружия", true);
+                LogEvent.Post(entity, "Нет оружия", true);
 
-                    return;
-                }
-                if (CheckOpportunityAttack())
-                {
-                    state.CombatSkill = combatsSkills.GetHashCode();
-                    state.Animationspeed = (float)System.Math.Round(state.Skills[state.CombatSkill] / 100, 2);
-                    transform.LookAt(TargetGameObject.transform);
-                    state.AttackTrigger();
-                
-                }
+                return;
             }
+            if (!CheckOpportunityAttack()) return;
+            
+                  
+            state.Animationspeed = (float)System.Math.Round(state.Skills[state.CombatSkill] / 100, 2);
+            transform.LookAt(TargetGameObject.transform);
+            state.AttackTrigger();
+            
+          
+            
+            
 
         }
 
@@ -322,7 +341,7 @@ namespace Player
         private int GetDamage(int damage) // Формула получения дамага
         {
             int value;
-            value = damage * Random.Range(_damage[0], _damage[1]);
+            value = damage * Random.Range(state.Damage[0], state.Damage[1]);
 
             return value;
 
@@ -387,22 +406,7 @@ namespace Player
         {
             state.ComboNumber = number;
             state.SpecialAttackTrigger();
-            //if (entity.IsOwner)
-            //{
-            //    if (_HandR == null)
-            //    {
-            //        LogEvent.Post(entity, "Нет оружия", true);
-
-            //        return;
-            //    }
-            //    if (CheckOpportunityAttack())
-            //    {
-                   
-            //        transform.LookAt(TargetGameObject.transform);
-            //        state.ComboNumber = number;
-            //        state.SpecialAttackTrigger();
-            //    }
-            //}
+    
        
         }
 
@@ -438,24 +442,28 @@ namespace Player
 
         }
 
+        private void UpdateUITarget()
+        {
+            if (!TargetEntity.isActiveAndEnabled) return;
+           
+            _UITarget.UpdateUI(TargetEntity.GetState<IPlayer>().CurrentHealth, TargetEntity.GetState<IPlayer>().TotalHealth, TargetEntity.GetState<IPlayer>().Name);
+            
+        }
+
+
         private void ActiveTarget() //Активирует Particle Цели, и включает табло отражения.
         {
+
+            if (TargetGameObject == null) return;
+                
+            ParticleSystem(TargetGameObject, true);
+            TargetGroup.SetActive(true);
+                    
+            UpdateUITarget();
+                    
+
+                
             
-                if (TargetGameObject != null)
-                {
-                    ParticleSystem(TargetGameObject, true);
-                    TargetGroup.SetActive(true);
-                    if (TargetEntity.isActiveAndEnabled)
-                    {
-                        _UITarget.UpdateUI(TargetEntity.GetState<IPlayer>().CurrentHealth, TargetEntity.GetState<IPlayer>().TotalHealth, TargetEntity.GetState<IPlayer>().Name);
-                    }
-
-                }
-            
-
-
-
-
         }
 
         private void ChangeTarget() // переключение таргета между целями
@@ -570,6 +578,7 @@ namespace Player
           
 
             TargetGroup = GameObject.FindGameObjectWithTag("TargetGroup");
+            TargetGroup.SetActive(false);
             _UITarget = TargetGroup.GetComponent<UITarget>();
 
          

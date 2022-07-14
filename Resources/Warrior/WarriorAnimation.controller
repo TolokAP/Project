@@ -399,6 +399,9 @@ AnimatorStateMachine:
   - first: {fileID: 2379492047618758293}
     second:
     - {fileID: 3451051267903078399}
+  - first: {fileID: -1250637650077823898}
+    second:
+    - {fileID: 21774306172156302}
   - first: {fileID: 5725870632378978230}
     second:
     - {fileID: 1305756802821366512}
@@ -406,9 +409,6 @@ AnimatorStateMachine:
   - first: {fileID: 382899450701307796}
     second:
     - {fileID: 4845441282053278984}
-  - first: {fileID: -1250637650077823898}
-    second:
-    - {fileID: 21774306172156302}
   - first: {fileID: -3881995542894428628}
     second:
     - {fileID: -3778647981358381464}

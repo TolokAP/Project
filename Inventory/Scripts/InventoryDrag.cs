@@ -16,20 +16,36 @@ namespace Player
         public int slot = -1;
         public Transform startParent;
         public GameObject dragPosition;
-       
+        public int IDItem = -1;
+
+        public GameObject infoItemPrefab;
+        public GameObject _infoItem;
        
 
+      
+      
 
         public void OnPointerClick(PointerEventData eventData)
         {
-            inventory.GetComponent<InventoryPlayer>().OpenWindowItemInfo(gameObject.transform, slot);
+            BoltLog.Error("Есть скрипт или нет" + eventData.pointerClick.name + eventData.pointerClick.TryGetComponent<InventoryDrag>(out InventoryDrag inventoryDrag));
+           
+            if (eventData.pointerClick.TryGetComponent<InventoryDrag>(out InventoryDrag inventoryDrag1))
+            {
+                BoltLog.Error(slot);
+                inventory.GetComponent<InventoryPlayer>().OpenWindowItemInfo(gameObject.transform, IDItem);
+            }
+            
 
         }
+
+
+
         private void Start()
         {
             startParent = transform.parent;
             inventory = GameObject.FindGameObjectWithTag("Inventory");
             dragPosition = GameObject.FindGameObjectWithTag("Canvas");
+           
         }
         public void OnBeginDrag(PointerEventData eventData)
         {

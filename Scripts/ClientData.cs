@@ -1,11 +1,9 @@
 using Photon.Bolt;
 using Photon.Bolt.Utils;
-
 using UnityEngine;
 using UdpKit;
 using System.Text;
 
-using Newtonsoft.Json;
 
 
 namespace Player
@@ -15,7 +13,7 @@ namespace Player
     {
         public GameObject Player;
         private string _name;
-        public BoltEntity ThisEntity;
+  
 
         private const string SendData = "SendDataPlayer";
         private const string SendSkillData = "SendDataSkillPlayer";
@@ -24,7 +22,7 @@ namespace Player
         private static UdpChannelName SendDataSkillChannel;
 
      
-        private PLayer _player;
+      
 
 
 
@@ -34,10 +32,7 @@ namespace Player
 
 
 
-        private void Start()
-        {
-            _player = new PLayer();
-        }
+      
         public override void BoltStartBegin()
         {
             BoltNetwork.RegisterTokenClass<ProtocolTokenLogin>();
@@ -68,11 +63,7 @@ namespace Player
 
 
 
-        public override void EntityAttached(BoltEntity entity)// Получение сущности игрока.
-        {
-
-            ThisEntity = entity;
-        }
+       
 
 
         public override void StreamDataStarted(BoltConnection connection, UdpChannelName channel, ulong streamID)
@@ -87,11 +78,8 @@ namespace Player
             {
                 BoltLog.Warn("Работает получение данных");
                 string dataP = Encoding.UTF8.GetString(data.Data);
-                BoltLog.Warn("Передано от {0} Данные {1} ", connection, dataP);
-                _player = JsonConvert.DeserializeObject<PLayer>(dataP);
-                
-
-                CreatePlayer();
+       
+                CreatePlayer(dataP);
             }
 
           
@@ -100,44 +88,15 @@ namespace Player
       
 
        
-        private void SetPlayerState()
+       
+
+        private void CreatePlayer(string data)
         {
-            ThisEntity.GetState<IPlayer>().Name = _player.Name;
-            ThisEntity.GetState<IPlayer>().TotalHealth = _player.Health;
-            ThisEntity.GetState<IPlayer>().Login = _player.Login;
-            BoltLog.Warn("размер массива" + _player.combatSkills.Length + " второго" + ThisEntity.GetState<IPlayer>().Skills.Length);
-            for(int i = 0; i < _player.combatSkills.Length; i++)
-            {
-                ThisEntity.GetState<IPlayer>().Skills[i] = _player.combatSkills[i];
-            }
-
-            ThisEntity.GetState<IPlayer>().slots = 5;
-            
-            BoltLog.Warn("размер массива" + _player.inventory.GetLength(0));
-            for (int i = 0; i <_player.inventory.GetLength(0); i++)
-            {
-                ThisEntity.GetState<IPlayer>().items[i].ID = _player.inventory[i, 0];
-                ThisEntity.GetState<IPlayer>().items[i].quantity = _player.inventory[i, 1];
-            }
-            for(int i=0; i < _player.equipment.Length; i++)
-            {
-                ThisEntity.GetState<IPlayer>().Equipmnet[i].ID = _player.equipment[i];
-
-            }
-            for(int i = 0; i < _player.stats.Length; i++)
-            {
-                ThisEntity.GetState<IPlayer>().Stats[i] = _player.stats[i];
-            }
-          
-
-        }
-
-
-        private void CreatePlayer()
-        {
-            var spawnPosi = new Vector3(Random.Range(20, 74), 30, 36);
-            Player = BoltNetwork.Instantiate(BoltPrefabs.WarriorPrefab, spawnPosi, Quaternion.identity);
-            SetPlayerState();
+            var dataPlayer = new LoadStatePlayer();
+            dataPlayer.data = data;
+            var spawnPosition = new Vector3(Random.Range(20, 74), 30, 36);
+            Player = BoltNetwork.Instantiate(BoltPrefabs.WarriorPrefab, dataPlayer, spawnPosition, Quaternion.identity);
+         
 
 
         }

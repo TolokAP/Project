@@ -61,7 +61,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2771317798489935819, guid: 3af467ae8a016534e8fadc84ce8954a0, type: 3}
       propertyPath: _prefabId
-      value: 13
+      value: 14
       objectReference: {fileID: 0}
     - target: {fileID: 2771317798489935819, guid: 3af467ae8a016534e8fadc84ce8954a0, type: 3}
       propertyPath: _serializerGuid

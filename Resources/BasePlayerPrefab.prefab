@@ -117,7 +117,6 @@ MonoBehaviour:
   TargetGroup: {fileID: 0}
   SpawnPositionArcherWeapon: {fileID: 0}
   dropChance: []
-  _damage: 0000000000000000
   _ForceShield: {fileID: 0}
   target: {fileID: 0}
 --- !u!114 &2466694066465456090
@@ -178,10 +177,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 74358a4f53e349541b166cf7892d3990, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GO: {fileID: 0}
   _characterCamera: {fileID: 0}
+  _itemDatabase: {fileID: 0}
   localHealth: 0
   _maxHealth: 0
+  _DeathWindow: {fileID: 0}
+  _RevivePortal: {fileID: 0}
+  body: {fileID: 0}
+  idItem: 
 --- !u!114 &2708495562096433514
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -213,6 +216,7 @@ MonoBehaviour:
   material: []
   HandL: {fileID: 0}
   HandR: {fileID: 0}
+  _equipmentID: 
   _combatsystem: {fileID: 0}
 --- !u!114 &3068259630419067765
 MonoBehaviour:

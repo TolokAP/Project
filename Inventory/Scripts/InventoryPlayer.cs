@@ -43,33 +43,30 @@ namespace Player
 
        
         #region Методы управления информацией по предмету
-        public void OpenWindowItemInfo(Transform parent,int slotId) //Создание информационного окна по предмету
+        public void OpenWindowItemInfo(Transform parent,int IDItem) //Создание информационного окна по предмету
         {
             BoltLog.Warn("Сработал метод открытия инфо");
             
                 CloseWindowItemInfo();
                 _infoItem = Instantiate(infoItemPrefab, parent.transform);
                 _infoItem.transform.SetParent(gameObject.transform);
-                _infoItem.GetComponent<InfoItem>().slotID = slotId;
-                GetInfoItem(slotId);
+                GetInfoItem(IDItem);
 
                     
         }
 
         public void CloseWindowItemInfo()//Удаление информационного окна по предмету
         {
-
-
             if (_infoItem)
             {
                 Destroy(_infoItem);
             }
         }
 
-        private void GetInfoItem(int slotId)//Получение информации  о предмете и передача информации вновь созданному информационному окну
+        private void GetInfoItem(int IDItem)//Получение информации  о предмете и передача информации вновь созданному информационному окну
         {
-            int _id = PlayerController.boltEntity.GetState<IPlayer>().items[slotId].ID;
-            ItemData itemData = ItemDatabase.LookIDItem(_id);
+           
+            ItemData itemData = ItemDatabase.LookIDItem(IDItem);
             string _itemDamageinfo;
             switch (itemData.GetTypeEquipment) // Выбор надписи в зависимости от того какого типа предмет
             {
@@ -84,8 +81,6 @@ namespace Player
 
            
             _infoItem.GetComponent<InfoItem>().SetStringInfo(itemData.GetDiscription, _itemDamageinfo,abilityDiscription[itemData.GetSpecialAttack]);//Передача вновь созданному предмету параметров для отображения
-
-
 
         }
 
@@ -180,6 +175,7 @@ namespace Player
             if (quantity > 1)
                 newItem.transform.GetChild(0).GetComponent<Text>().text = quantity.ToString();
             newItem.GetComponent<InventoryDrag>().slot = slotID;
+            newItem.GetComponent<InventoryDrag>().IDItem = ItemData.GetIDItem;
             newItem.transform.SetParent(ListObject[slotID].transform);
             newItem.GetComponent<RectTransform>().localPosition = Vector3.zero;
             newItem.GetComponent<RectTransform>().localScale = Vector3.one;
@@ -192,28 +188,29 @@ namespace Player
         public void refreshItem(List<GameObject> gameObjects, NetworkArray_Objects<item> myState)
         {
             GameObject PAL = GameObject.FindGameObjectWithTag("Player");
-            if (PAL.GetComponent<BoltEntity>().IsOwner)
-            {
+
+            if (!PAL.GetComponent<BoltEntity>().IsOwner) return;
+            
                
-                    for (int i = 0; i < gameObjects.Count; i++)
-                    {
-                       if (myState[i].ID != 0)
-                        {
-                            instantiateItem(i, myState[i].ID, myState[i].quantity,gameObjects);
+            for (int i = 0; i < gameObjects.Count; i++)
+            {
+                if (myState[i].ID != 0)
+                {
+                    instantiateItem(i, myState[i].ID, myState[i].quantity,gameObjects);
                          
-                        }
-                        else
-                        {
+                }
+                else
+                {
                         
                             
-                            foreach (Transform child in gameObjects[i].transform)
-                            {
-                                if (child.GetComponent<InventoryDrag>()) Destroy(child.gameObject);
-                            }
-                        }
+                    foreach (Transform child in gameObjects[i].transform)
+                    {
+                        if (child.GetComponent<InventoryDrag>()) Destroy(child.gameObject);
                     }
-
+                }
             }
+
+            
         }
 
        

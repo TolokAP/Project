@@ -223,6 +223,9 @@ namespace Player
 
         #region BoltEvent
 
+
+
+
         public override void OnEvent(PlayerConnecting evnt)//Событие отправки данных игрока подключившемуся игроку
         {
 

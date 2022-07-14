@@ -22,7 +22,7 @@ public class BoltInit : GlobalEventListener
 	public InputField CreatePass;
 	public InputField CreateName;
 	public ToggleGroup toggleGroup;
-	public string _Class;
+	
 
 	public override void BoltStartBegin()
 		{
@@ -46,14 +46,13 @@ public class BoltInit : GlobalEventListener
 				if (createPlayer)
 				{
 				ProtocolTokenLogin credentials = new ProtocolTokenLogin
-				{
-					Username = CreateLogin.text,
-					Password = CreatePass.text,
-					NamePlayer = CreateName.text,
-					Create = true,
-					Class = _Class
-
-					};
+					{
+						Username = CreateLogin.text,
+						Password = CreatePass.text,
+						NamePlayer = CreateName.text,
+						Create = true,
+						
+						};
 					BoltMatchmaking.JoinRandomSession(credentials);
 				}
 				else
@@ -75,12 +74,7 @@ public class BoltInit : GlobalEventListener
 			
 		}
 
-	    public void SetToggle(string value)
-		{
-		_Class = value;
-
-
-		}
+	   
 	   
 		public override void BoltShutdownBegin(AddCallback registerDoneCallback, UdpConnectionDisconnectReason disconnectReason)
 		{
