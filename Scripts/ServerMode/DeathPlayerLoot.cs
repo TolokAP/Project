@@ -8,24 +8,19 @@ using Newtonsoft.Json;
 using DuloGames.UI;
 using Player;
 using UnityEngine.UI;
-using System;
 
-public class DeathPlayerLoot : EntityBehaviour<IDeadPlayerState>, IPointerDownHandler
+
+public class DeathPlayerLoot : EntityBehaviour<IDeadPlayerState>
 {
-    public List<int> idItem = new List<int>();
-    public GameObject LootBox;
-    public ItemDatabase itemDatabase;
-    public GameObject LootItem;
-    public GameObject ContentBox;
     [SerializeField]
-    private GameObject _Player;
-    [SerializeField]
-    private BoltEntity _entityDeathPlayer;
-    [SerializeField]
-    private BoltEntity _entityPlayers;
+    private List<int> idItem = new List<int>();
 
-    public List<GameObject> Items = new List<GameObject>();
- 
+    public bool _isOpen;
+
+    public GameObject PlayerWhoOpen;
+
+    
+
     public override void Attached()
     {
         var token = (LootEquipID)entity.AttachToken;
@@ -36,80 +31,36 @@ public class DeathPlayerLoot : EntityBehaviour<IDeadPlayerState>, IPointerDownHa
             state.IdItem[i] = idItem[i];
         }
 
+       
+        state.AddCallback("IdItem[]", ChangeItem); // обратный вызов обновляет список предметов для лута
 
-        LootBox = GameObject.FindGameObjectWithTag("LootBox");// Получение ссылки на место куда переносить предметы
 
-        FindEntityPlayer();
-        _entityDeathPlayer = gameObject.GetComponentInParent<BoltEntity>();
-
-        ContentBox = LootBox.GetComponentInChildren<GridLayoutGroup>().gameObject;
-
-        NetworkId network = new NetworkId(token.NetworkID);
-        var _entity = BoltNetwork.FindEntity(network);
-        BoltLog.Error("Угол поворота " + _entity.transform.rotation);
-        Instantiate(_entity.gameObject.GetComponent<PlayerState>().body, _entity.transform.position, _entity.transform.rotation,gameObject.transform);
-
-        state.AddCallback("IdItem[]", ChangeItem);
     }
 
-    private void ChangeItem(IState states, string propertyPath, ArrayIndices arrayIndices)
+    private void ChangeItem(IState states, string propertyPath, ArrayIndices arrayIndices) // обратный вызов обновляет список предметов для лута
     {
         int index = arrayIndices[0];
-        foreach (GameObject item in Items)
-        {
-            Destroy(item);
+        if (!_isOpen) return;
+        if (PlayerWhoOpen != null) {
+
+            PlayerWhoOpen.GetComponent<ActionHandScript>().InstantiateItems(state.IdItem, entity);//Обновить предметы у персонажа кто октрыл труп
+
         }
-        Items.Clear();
-        InstantiateItems();
+       
       
     }
 
-    public void OnPointerDown(PointerEventData eventData)//Нажимание на труп 
+  
+
+    private void OnTriggerExit(Collider other)
     {
-    
-        LootBox.gameObject.GetComponent<UIWindow>().Show(); // Открывает окно лута 
-
-    }
-
-    private void InstantiateItems()
-    {
-
-        for (int i = 0; i < state.IdItem.Length; i++)
+        if (other.gameObject == PlayerWhoOpen)
         {
-            if (state.IdItem[i] != 0)
-            {
-
-
-                GameObject Item = Instantiate(LootItem, ContentBox.transform);//Создание предмета для лута
-
-                Item.GetComponent<Image>().sprite = itemDatabase.LookIDItem(state.IdItem[i]).GetIconItem;// Устанавливаем иконки
-
-                Item.GetComponent<ItemDrag>().SetId(state.IdItem[i]);// Устанавливаем айди на предмет
-
-                Item.GetComponent<ItemDrag>().SetEntity(_entityDeathPlayer); //Сущность трупа игрока(Владелец:Сервер)
-
-                Item.GetComponent<ItemDrag>().SetEntityPlayer(_entityPlayers);//Сущность игрока который забирает предмет
-                Items.Add(Item);
-            }
+            BoltLog.Error("Вышел из триггера");
+           _isOpen = false;
+            PlayerWhoOpen.GetComponent<ActionHandScript>()._lootWindow.Hide();
         }
-
-
-
-
-    }
-    private void FindEntityPlayer()//Метод поиска сущности игрока, владельца.
-    {
-        GameObject[] Players = GameObject.FindGameObjectsWithTag("Player"); //Находит всех игроков 
-        foreach (GameObject player in Players)
-        {
-            if (player.GetComponent<BoltEntity>().IsOwner)
-            {
-                _Player = player;
-                _entityPlayers = _Player.GetComponent<BoltEntity>();
-            }
-        }
-        
-
     }
 
+   
 }

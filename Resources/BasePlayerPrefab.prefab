@@ -185,6 +185,8 @@ MonoBehaviour:
   _RevivePortal: {fileID: 0}
   body: {fileID: 0}
   idItem: 
+  DeadPlayerWindow: {fileID: 0}
+  _DeadPlayer: {fileID: 0}
 --- !u!114 &2708495562096433514
 MonoBehaviour:
   m_ObjectHideFlags: 0

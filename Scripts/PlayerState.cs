@@ -4,6 +4,7 @@ using Photon.Bolt;
 using Newtonsoft.Json;
 using Photon.Bolt.Utils;
 using System.Collections.Generic;
+using System.Collections;
 
 namespace Player {
     public class PlayerState : EntityEventListener<IPlayer>
@@ -31,15 +32,18 @@ namespace Player {
 
         public List<int> idItem = new List<int>();
 
+        public GameObject DeadPlayerWindow;
 
+        [SerializeField]
+        private GameObject _DeadPlayer;
 
         public override void Attached()
         {
-
+            DeadPlayerWindow = GameObject.FindGameObjectWithTag("DeadPlayerWindow");
 
             if (!entity.IsOwner) {
 
-                ChangeLayer();// Если другой игрок то установить другой слой
+                ChangeLayer("OtherPlayer");// Если другой игрок то установить другой слой и отключить коллайдер
                 
                 return;
             } 
@@ -61,17 +65,23 @@ namespace Player {
             state.AddCallback("Damage[]", UpdateDamageUI);//Обратный вызов обновление Damage
            
             SetPlayerState();
-                     
-            
+
+
+            SphereCollider sphereCollider = gameObject.AddComponent<SphereCollider>();//Добавляем коллайдер 
+            sphereCollider.radius = 10;
+            sphereCollider.isTrigger = true;
+
            
         }
 
-        private void ChangeLayer()//Смена слоя у игроков
+        private void ChangeLayer(string value)//Смена слоя у игроков и отключение коллайдеров
         {
+
+            
             Transform[] layers = gameObject.GetComponentsInChildren<Transform>();
             foreach (Transform layer in layers)
             {
-                layer.gameObject.layer = LayerMask.NameToLayer("OtherPlayer");
+                layer.gameObject.layer = LayerMask.NameToLayer(value);
 
             }
             
@@ -94,7 +104,10 @@ namespace Player {
 
         private void SetPlayerState() // Переносит данные из файла в сущность Bolt.
         {
-            _boltEntity.GetState<IPlayer>().Name = _player.Name;
+            //_boltEntity.GetState<IPlayer>().Name = _player.Name;
+
+            _boltEntity.GetState<IPlayer>().Name = Random.Range(0, 100).ToString();
+
             _boltEntity.GetState<IPlayer>().TotalHealth = _player.Health;
             _boltEntity.GetState<IPlayer>().Login = _player.Login;
           
@@ -122,7 +135,7 @@ namespace Player {
             {
                 _boltEntity.GetState<IPlayer>().Stats[i] = _player.stats[i];
             }
-
+          
 
         }
 
@@ -171,7 +184,7 @@ namespace Player {
             if (!entity.IsOwner) return;
 
            
-            if (state.CurrentHealth <= 0)
+            if (state.CurrentHealth <= 0) // Текущеее здоровье меньше нуля
             {
                 if (state.Dead == false)
                 {
@@ -181,11 +194,7 @@ namespace Player {
                     state.Dead = true;
                     _ = DeadPlayer.Post(entity, true);
 
-                    //BoltNetwork.Destroy(gameObject);
 
-
-                    BoltLog.Error("Сработал метод" + state.CurrentHealth);
-                   
                     for (int i = 0; i < state.Equipmnet.Length; i++)
                     {
                         if (state.Equipmnet[i].ID != 0)
@@ -209,32 +218,57 @@ namespace Player {
           
         }
 
-        public void AnimatiomEventDeadPlayerEnd()
+        public void AnimatiomEventDeadPlayerEnd()//Событие срабатывает в конце анимации смерти
         {
-            if (!entity.IsOwner) return;
-            string equip = JsonConvert.SerializeObject(idItem);
-            _DeathWindow.SetActive(true);
-            _ = LootItemInPlayerToServer.Post(GlobalTargets.OnlyServer, entity.NetworkId, equip);
+           
+            _DeadPlayer =  Instantiate(body, transform.position, transform.rotation, DeadPlayerWindow.transform); // создание трупа для лута
 
-            BoltLog.Error("Сработала анимация");
-          
+            ChangeLayer("Invisible");// основного персонажа делает невидимым
+
+
+            if (entity.IsOwner)
+            {
+
+                _DeathWindow.SetActive(true); //Открывает окно "смерти персонажа"
+
+                string equip = JsonConvert.SerializeObject(idItem);
+
+                _ = LootItemInPlayerToServer.Post(GlobalTargets.OnlyServer, equip, _DeadPlayer.transform.position); // отправка события на сервер 
+
+                ch_controller.enabled = false;
+
+                transform.position = _RevivePortal.position;//Телепорт к месту воскрешения
+
+
+                ch_controller.enabled = true;
+
+                ChangeLayer("Player");
+            }
+            else
+            {
+                ChangeLayer("OtherPlayer");
+            }
+        }
+
+
+      
+
+        public void PlayEffect(GameObject Effect)
+        {
+            BoltLog.Error("Работает метод эффекта");
+            GameObject _effect =  Instantiate(Effect,gameObject.transform);
+            Destroy(_effect, 5f);
 
         }
 
-        public void OffDeathWindow()
+
+        public void OffDeathWindow()// Метод на кнопке окна "Смерти Персонажа"
         {
-            _DeathWindow.SetActive(false);
-            state.ReviveTrigger();
+            _DeathWindow.SetActive(false);//Закрываем окно
+
+            
             state.Dead = false;
-            BoltLog.Error("Позиция " + transform.position + _RevivePortal.position);
-
-            ch_controller.enabled = false;
-            transform.position = _RevivePortal.position;
-            ch_controller.enabled = true;
-
-
-
-            BoltLog.Error("Позиция 2" + transform.position + _RevivePortal.position);
+        
         }
 
         private void SkillPlayerCallbacks(IState state, string propertyPath, ArrayIndices arrayIndices)

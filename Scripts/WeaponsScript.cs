@@ -16,6 +16,7 @@ namespace Player
       
 
         public ParticleSystem shadow;
+        public ParticleSystem _hit;
        
  
          private Material _normalMaterial;
@@ -92,9 +93,10 @@ namespace Player
         {
             if (typeEquipment == TypeEquipment.weapon)
             {
-                BoltLog.Warn("Работает из метода WeaponScript");
+                BoltLog.Error("Работает из метода WeaponScript");
 
                 shadow.Play();
+                _hit.Play();
             }
       
 
@@ -141,8 +143,8 @@ namespace Player
 
         }
 
-      
-      
+       
+
 
         public void OnPointerDown(PointerEventData eventData)// Событие поднятие предмета с земли в инвентарь. Событие отправляется на сервер.
         {

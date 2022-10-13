@@ -3,7 +3,6 @@ using UnityEngine;
 using Photon.Bolt;
 
 
-
 public class PlayerController : EntityBehaviour<IPlayer>
 {
     private Vector3 moveVector;
@@ -122,8 +121,5 @@ public class PlayerController : EntityBehaviour<IPlayer>
 
     }
 
-
-
-
-  
+    
 }

@@ -34,15 +34,13 @@ namespace Player
                 BoltLog.Error("Номер экипировки" + value);
             
             }
-            NetworkId network = new NetworkId(evnt.NetworkID.PackedValue);
-            var _entity = BoltNetwork.FindEntity(network);
            
 
             var token = new LootEquipID();
             token.EquipID = evnt.EquipmentID;
-            token.NetworkID = _entity.NetworkId.PackedValue;
            
-            BoltNetwork.Instantiate(LootBox, token,_entity.gameObject.transform.position,Quaternion.identity);
+           
+            BoltNetwork.Instantiate(LootBox, token,evnt.TransformDeadPlayer,Quaternion.identity);
             
         }
 
@@ -52,7 +50,7 @@ namespace Player
             
             int size = evnt.EntityDeadPlayer.GetState<IDeadPlayerState>().IdItem.Length;// Получение размера массива
 
-
+           
             for (int i = 0; i < size; i++) //Проверка на присутствие предмета для возможност лута.
             {
                 if(evnt.EntityDeadPlayer.GetState<IDeadPlayerState>().IdItem[i] == evnt.ID)

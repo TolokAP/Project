@@ -5,13 +5,13 @@ using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using Photon.Bolt;
 
-public class ItemDrag : GlobalEventListener, IBeginDragHandler, IDragHandler, IEndDragHandler, IPointerClickHandler, IPointerDownHandler
-{
-    public Transform startParent;
+public class ItemDrag : GlobalEventListener, IBeginDragHandler, IDragHandler, IEndDragHandler
+{   private Transform startParent;
     [SerializeField]
     private int _id;
-    private BoltEntity _entity;
-    private BoltEntity _entityPlayer;
+
+    private BoltEntity _entityDeadPlayer; // ссылка на сущность трупа
+    private BoltEntity _entityPlayerWhoLootItem;//ссылк на сущность персонажа кто лутает
 
 
     private void Start()
@@ -29,22 +29,19 @@ public class ItemDrag : GlobalEventListener, IBeginDragHandler, IDragHandler, IE
 
     }
 
-    public void SetId(int id)
+    public void SetParametr(int id, BoltEntity entity, BoltEntity entityDeadPlayer)// установка параметров предмета при создании лута
     {
         _id = id;
+
+        _entityDeadPlayer = entityDeadPlayer;
+
+        _entityPlayerWhoLootItem = entity;
     }
     public int GetId()
     {
         return _id;
     }
-    public void SetEntity(BoltEntity entity)
-    {
-        _entity = entity;
-    }
-    public void SetEntityPlayer(BoltEntity entity)
-    {
-        _entityPlayer = entity;
-    }
+   
     public void OnEndDrag(PointerEventData eventData)
     {
         GetComponent<Image>().raycastTarget = true;
@@ -52,20 +49,12 @@ public class ItemDrag : GlobalEventListener, IBeginDragHandler, IDragHandler, IE
         
         if (eventData.pointerCurrentRaycast.gameObject.CompareTag("Loot"))
         {
-            IDLootItem.Post(GlobalTargets.OnlyServer,_entity,_id,_entityPlayer);
+            IDLootItem.Post(GlobalTargets.OnlyServer,_entityDeadPlayer,_id,_entityPlayerWhoLootItem);
            
             Debug.Log("Перемещено на лут");
             GameObject.Destroy(gameObject);
         }
     }
 
-    public void OnPointerClick(PointerEventData eventData)
-    {
-      
-    }
-
-    public void OnPointerDown(PointerEventData eventData)
-    {
-    
-    }
+  
 }
